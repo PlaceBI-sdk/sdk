@@ -31,7 +31,7 @@ The unique name should be notified in the manifest with a meta-data item:
 ```
     <meta-data
         android:name="com.woorlds.serviceintent"
-        android:value="<b>com.example.yourapp.serviceintent</b>" />
+        android:value="com.example.yourapp.serviceintent" />
 ```
 
 The api key provided by woorlds should be specified in the manifest as well:
