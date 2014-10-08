@@ -8,7 +8,7 @@ in order to use Woorlds you will need to include the supplied [jar](WoorldsDemo/
 the next step is to alter the AndroidManifest.xml.
 
 The service requires the following permissions in order to function properly, please add them to your AndroidManifest.xml:
-```
+```xml
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,7 +19,7 @@ The service requires the following permissions in order to function properly, pl
 ```
 The service definition should be unique by its name so multiple instances of the service can co-exist:
 
-```
+```xml
     <service android:name="com.woorlds.woorldssdk.WoorldsService">
         <intent-filter>
              <action android:name="com.example.yourapp.serviceintent" />
@@ -28,21 +28,21 @@ The service definition should be unique by its name so multiple instances of the
 ```
 
 The unique name should be notified in the manifest with a meta-data item:
-```
+```xml
     <meta-data
         android:name="com.woorlds.serviceintent"
         android:value="com.example.yourapp.serviceintent" />
 ```
 
 The api key provided by woorlds should be specified in the manifest as well:
-```
+```xml
     <meta-data
         android:name="com.woorlds.ApiKey"
         android:value="your-api-key" />
 ```
 
 To allow the service to start at device boot add the following receiver:
-```
+```xml
     <receiver android:name="com.woorlds.woorldssdk.StartupReceiver" >
         <intent-filter>
             <action android:name="android.intent.action.BOOT_COMPLETED" />
