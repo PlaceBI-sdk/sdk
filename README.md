@@ -41,6 +41,8 @@ The api key provided by woorlds should be specified in the manifest as well:
         android:value="your-api-key" />
 ```
 
+Please contact info@woorlds.com for a unique key for your application.
+
 To allow the service to start at device boot add the following receiver:
 ```xml
     <receiver android:name="com.woorlds.woorldssdk.StartupReceiver" >
