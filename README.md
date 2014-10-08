@@ -49,6 +49,61 @@ To allow the service to start at device boot add the following receiver:
         </intent-filter>
     </receiver>
 ```
-For reference use the full [AndroidManifest.xml](WoorldsDemo/AndroidManifest.xml).
+For reference please see the full [AndroidManifest.xml](WoorldsDemo/AndroidManifest.xml).
 
+Now that your project is set up lets see how to initialize:
+```java
+    mWoorlds = new WoorldsSDK();
+```
+
+Once it has been initialized you can subscribe to events by passing an events listener
+```java
+    WoorldsEventsReceiver eventsReceiver = new WoorldsEventsReceiver() {
+        @Override
+        public void woorldsError(String errorString) {
+            // write it to log
+            Log.e(TAG, "Woorlds Error: " + errorString);
+            Toast.makeText(getApplicationContext(), "Error: " + errorString, Toast.LENGTH_SHORT).show();
+        }
+    
+        @Override
+        public void woorldsDataUpdated(WoorldsData woorldsData) {
+            // check if we are inside a woorld
+            WoorldInfo inWoorld = null;
+            if (null != mWoorlds.serverData && null != mWoorlds.serverData.wifiWorlds) {
+                List<WoorldInfo> woorlds = mWoorlds.serverData.wifiWorlds;
+                // find the world we are in
+                for (WoorldInfo woorld : woorlds) {
+                    if (woorld.inWoorld) {
+                        inWoorld = woorld;
+                    }
+                }
+            }
+            if (inWoorld != null) {
+                Log.i(TAG, "We are in woorld: " + inWoorld.worldName);
+            }
+        }
+    };
+
+    // Register the event receiver
+    mWoorlds.registerWoorldsEvents(eventsReceiver);
+```
+
+Update events will now be handled by the receiver
+
+Tracking
+========
+Custom tracking events can be sent, and an identity may(or not) be specified. an Identity is persisted and can be called once per user identification, ofcourse it may be called again to update user's identity. An identity can be specified like this:
+
+```java
+    mWoorlds.identity("johndoe");
+```
+
+In order to create a custom tracking event you may specify event name, and additional data in a HashMap<String,Object>. Object can be any type of object which can be serialized using the jackson json serializer.
+```java
+    HashMap<String,Object> data = new HashMap<String,Object>();
+    data.put("click", "button1");
+    data.put("activity","welcome-screen");
+    mWoorlds.track("user-action", data);
+```
 For a working example please take a look at the [Demo Application](WoorldsDemo/src/com/example/woorldsdemo/DemoActivity.java)
