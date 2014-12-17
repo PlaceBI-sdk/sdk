@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -27,32 +27,34 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+        
+        <activity
+            android:name=".DemoActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-        <service android:name="com.woorlds.woorldssdk.WoorldsRemoteService" >
+        <service android:name="com.woorlds.woorldssdk.WoorldsService" >
             <intent-filter>
 
                 <!-- this intent name must be unique to your app -->
                 <action android:name="com.example.woorldsdemo.serviceintent" />
             </intent-filter>
         </service>
-
-        <!-- the following meta-data info must be specified -->
-        <meta-data
-            android:name="com.woorlds.version"
-            android:value="1" />
-        
         <!--  repeat the unique intent you have specified in the service -->
         <meta-data
             android:name="com.woorlds.serviceintent"
             android:value="com.example.woorldsdemo.serviceintent" />
         
         <!-- the key that is give to you by woorlds -->
-        <meta-data
+         <meta-data
             android:name="com.woorlds.ApiKey"
             android:value="30bd1805-7deb-4158-b8bb-1b3796f51382" />
-        <meta-data
-            android:name="com.crashlytics.ApiKey"
-            android:value="7bf629dbba391e4e5fd307b559b5343f7c4a02a7" />
+        
     </application>
 
 </manifest>
