@@ -1,1 +1,5 @@
+bin/
+gen/
 .DS_Store
+crashlytics-build.properties
+com_crashlytics_export_strings.xml
