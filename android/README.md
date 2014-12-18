@@ -72,8 +72,9 @@ Once it has been initialized you can subscribe to events by passing an events li
         public void woorldsDataUpdated(WoorldsData woorldsData) {
             // check if we are inside a woorld
             WoorldInfo inWoorld = null;
-            if (null != mWoorlds.serverData && null != mWoorlds.serverData.wifiWorlds) {
-                List<WoorldInfo> woorlds = mWoorlds.serverData.wifiWorlds;
+            if (null != woorldsData.serverData && null != woorldsData.serverData.wifiWorlds) {
+                List<WoorldInfo> woorlds = woorldsData.serverData.wifiWorlds;
+                
                 // find the world we are in
                 for (WoorldInfo woorld : woorlds) {
                     if (woorld.inWoorld) {
