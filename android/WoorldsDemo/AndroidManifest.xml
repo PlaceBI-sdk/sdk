@@ -38,19 +38,8 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.woorlds.woorldssdk.WoorldsService" >
-            <intent-filter>
-
-                <!-- this intent name must be unique to your app -->
-                <action android:name="com.example.woorldsdemo.serviceintent" />
-            </intent-filter>
-        </service>
-        <!--  repeat the unique intent you have specified in the service -->
-        <meta-data
-            android:name="com.woorlds.serviceintent"
-            android:value="com.example.woorldsdemo.serviceintent" />
-        
-        <!-- the key that is give to you by woorlds -->
+        <service android:name="com.woorlds.woorldssdk.WoorldsService" />
+        <!-- the key that is give to you by woorlds -->‎
          <meta-data
             android:name="com.woorlds.ApiKey"
             android:value="30bd1805-7deb-4158-b8bb-1b3796f51382" />

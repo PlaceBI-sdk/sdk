@@ -15,23 +15,12 @@ The service requires the following permissions in order to function properly, pl
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 ```
 The service definition should be unique by its name so multiple instances of the service can co-exist:
 
 ```xml
-    <service android:name="com.woorlds.woorldssdk.WoorldsService">
-        <intent-filter>
-             <action android:name="com.example.yourapp.serviceintent" />
-        </intent-filter>
-    </service>
-```
-
-The unique name should be notified in the manifest with a meta-data item:
-```xml
-    <meta-data
-        android:name="com.woorlds.serviceintent"
-        android:value="com.example.yourapp.serviceintent" />
+    <service android:name="com.woorlds.woorldssdk.WoorldsService"/>
 ```
 
 The api key provided by woorlds should be specified in the manifest as well:
