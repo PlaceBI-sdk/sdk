@@ -32,7 +32,7 @@ public class DemoActivity extends Activity implements WoorldsEventsReceiver {
             
             // find the world we are in
             for (WoorldInfo woorld : woorlds) {
-                if (woorld.inWoorld) {
+                if (woorld.InWoorld) {
                     inWoorld = woorld;
                 }
             }
