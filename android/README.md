@@ -42,46 +42,55 @@ To allow the service to start at device boot add the following receiver:
 ```
 For reference please see the full [AndroidManifest.xml](WoorldsDemo/AndroidManifest.xml).
 
-Now that your project is set up lets see how to initialize:
-```java
-    mWoorlds = new WoorldsSDK();
-```
+Now that your project is set up lets see how to initialize, and register the events receiver if needed.
 
-Once it has been initialized you can subscribe to events by passing an events listener
+
 ```java
-    WoorldsEventsReceiver eventsReceiver = new WoorldsEventsReceiver() {
-        @Override
-        public void woorldsError(String errorString) {
-            // write it to log
-            Log.e(TAG, "Woorlds Error: " + errorString);
-            Toast.makeText(getApplicationContext(), "Error: " + errorString, Toast.LENGTH_SHORT).show();
-        }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mWoorldsSDK = new WoorldsSDK(this);
     
-        @Override
-        public void woorldsDataUpdated(WoorldsData woorldsData) {
-            // check if we are inside a woorld
-            WoorldInfo inWoorld = null;
-            if (null != woorldsData.serverData && null != woorldsData.serverData.wifiWorlds) {
-                List<WoorldInfo> woorlds = woorldsData.serverData.wifiWorlds;
-                
-                // find the world we are in
-                for (WoorldInfo woorld : woorlds) {
-                    if (woorld.inWoorld) {
-                        inWoorld = woorld;
+        WoorldsEventsReceiver eventsReceiver = new WoorldsEventsReceiver() {
+            @Override
+            public void woorldsError(String errorString) {
+                // write it to log
+                Log.e(TAG, "Woorlds Error: " + errorString);
+                Toast.makeText(getApplicationContext(), "Error: " + errorString, Toast.LENGTH_SHORT).show();
+            }
+        
+            @Override
+            public void woorldsDataUpdated(WoorldsData woorldsData) {
+                WoorldInfo inWoorld = null;
+                if (null != woorldsData.serverData && null != woorldsData.serverData.wifiWorlds) {
+                    List<WoorldInfo> woorlds = woorldsData.serverData.wifiWorlds;
+                    
+                    // find the world we are in
+                    for (WoorldInfo woorld : woorlds) {
+                        if (woorld.InWoorld) {
+                            inWoorld = woorld;
+                        }
                     }
                 }
+                if (inWoorld != null) {
+                    Log.i(TAG, "We are in woorld: " + inWoorld.worldName);
+                }   // insert some logic here
+                
             }
-            if (inWoorld != null) {
-                Log.i(TAG, "We are in woorld: " + inWoorld.worldName);
-            }
-        }
-    };
+        };
 
-    // Register the event receiver
-    mWoorlds.registerWoorldsEvents(eventsReceiver);
+        mWoorldsSDK.registerWoorldsEvents(eventsReceiver);
+    }
 ```
 
-Update events will now be handled by the receiver
+You must call destroy() when activity to ensure proper disconnection from the service:
+```java
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mWoorldsSDK.destroy();
+    }
+```
 
 Tracking
 ========

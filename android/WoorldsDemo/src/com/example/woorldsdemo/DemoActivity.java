@@ -11,8 +11,8 @@ import com.woorlds.woorldssdk.WoorldsSDK.WoorldsEventsReceiver;
 import com.woorlds.woorldssdk.client.WoorldInfo;
 import com.woorlds.woorldssdk.client.WoorldsData;
 
-public class DemoActivity extends Activity implements WoorldsEventsReceiver {
-	private static String TAG = "WoordsTestActivity";
+public class DemoActivity extends Activity {
+	private static String TAG = "DemoActivity";
 
 	WoorldsSDK mWoorldsSDK;
 
@@ -20,33 +20,48 @@ public class DemoActivity extends Activity implements WoorldsEventsReceiver {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
 		mWoorldsSDK = new WoorldsSDK(this);
-		mWoorldsSDK.registerWoorldsEvents(this);
+		mWoorldsSDK.registerWoorldsEvents(woorldsEventsReceiver);
 	}
 
+	// this is mandatory
 	@Override
-	public void woorldsDataUpdated(WoorldsData woorldsData) {
-        WoorldInfo inWoorld = null;
-        if (null != woorldsData.serverData && null != woorldsData.serverData.wifiWorlds) {
-            List<WoorldInfo> woorlds = woorldsData.serverData.wifiWorlds;
-            
-            // find the world we are in
-            for (WoorldInfo woorld : woorlds) {
-                if (woorld.InWoorld) {
-                    inWoorld = woorld;
-                }
-            }
-        }
-        if (inWoorld != null) {
-            Log.i(TAG, "We are in woorld: " + inWoorld.worldName);
-        }	// insert some logic here
-		
+	protected void onStop() {
+		super.onStop();
+		mWoorldsSDK.destroy();
 	}
 	
-	@Override
-	public void woorldsError(String error) {
-		Log.e(TAG, "Woorlds Error Message: " + error);
+	WoorldsEventsReceiver woorldsEventsReceiver = new WoorldsEventsReceiver() {
 		
-	}
-	
+		@Override
+		public void woorldsError(String arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void woorldsDataUpdated(WoorldsData woorldsData) {
+			// TODO Auto-generated method stub
+	        WoorldInfo inWoorld = null;
+	        if (null != woorldsData.serverData && null != woorldsData.serverData.wifiWorlds) {
+	            List<WoorldInfo> woorlds = woorldsData.serverData.wifiWorlds;
+	            
+	            // find the world we are in
+	            for (WoorldInfo woorld : woorlds) {
+	                if (woorld.InWoorld) {
+	                    inWoorld = woorld;
+	                }
+	            }
+	        }
+	        if (inWoorld != null) {
+	            Log.i(TAG, "We are in woorld: " + inWoorld.worldName);
+	        }	// insert some logic here
+			
+		}
+	};	
 }
