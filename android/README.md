@@ -83,7 +83,7 @@ Now that your project is set up lets see how to initialize, and register the eve
     }
 ```
 
-You must call destroy() when activity to ensure proper disconnection from the service:
+You must call destroy() when activity stops to ensure proper disconnection from the service:
 ```java
     @Override
     protected void onStop() {
