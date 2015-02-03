@@ -3,7 +3,7 @@ Woorlds SDK
 
 Welcome to the Woorlds SDK Readme file.
 
-in order to use Woorlds you will need to include the supplied [jar](WoorldsDemo/libs/WoorldsSDK.jar) file in your project. please add it to your Java Build Path from your Project Properties (in eclipse) under Libraries.
+In order to use Woorlds you will need to include the supplied jars in the [libs](WoorldsDemo/libs) folder in your project, if any of those libraries are already used by your project it is not needed to be added. please add it to your Java Build Path from your Project Properties (in eclipse) under Libraries.
 
 the next step is to alter the AndroidManifest.xml.
 
