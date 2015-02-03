@@ -42,7 +42,31 @@ To allow the service to start at device boot add the following receiver:
 ```
 For reference please see the full [AndroidManifest.xml](WoorldsDemo/AndroidManifest.xml).
 
-Now that your project is set up lets see how to initialize, and register the events receiver if needed.
+
+You must instantiate the WoorldsSDK class to ensure service is started and call destroy() when activity stops to ensure proper disconnection from the service:
+```java
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mWoorldsSDK = new WoorldsSDK(this);
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mWoorldsSDK.destroy();
+    }
+```
+
+Segmentations
+=============
+whenever necessary you may query for the current segmentations:
+```java
+    List<Segment> segmentations = mWoorldsSDK.getSegmentations("some-campaign-id");
+```
+
+Woorlds Updates
+===============
+This requires special permissions - please contact us
 
 
 ```java
@@ -80,15 +104,6 @@ Now that your project is set up lets see how to initialize, and register the eve
         };
 
         mWoorldsSDK.registerWoorldsEvents(eventsReceiver);
-    }
-```
-
-You must call destroy() when activity stops to ensure proper disconnection from the service:
-```java
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mWoorldsSDK.destroy();
     }
 ```
 
