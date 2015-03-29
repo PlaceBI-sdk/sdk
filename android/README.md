@@ -46,15 +46,22 @@ For reference please see the full [AndroidManifest.xml](WoorldsDemo/AndroidManif
 You must instantiate the WoorldsSDK class to ensure service is started and call destroy() when activity stops to ensure proper disconnection from the service:
 ```java
     @Override
-    protected void onStart() {
-        super.onStart();
-        mWoorldsSDK = new WoorldsSDK(this);
+    protected void onResume() {
+        super.onResume();
+        if (mWoorldsSDK == null) {
+            mWoorldsSDK = new WoorldsSDK(this);
+        }
+    }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mWoorldsSDK.destroy();
+        if (mWoorldsSDK != null) {
+            mWoorldsSDK.destroy();
+            mWoorldsSDK = null;
+        }
     }
+
 ```
 
 Segmentations
