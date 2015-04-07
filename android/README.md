@@ -71,6 +71,34 @@ whenever necessary you may query for the current segmentations:
     List<Segment> segmentations = mWoorldsSDK.getSegmentations("some-campaign-id");
 ```
 
+
+Tracking
+========
+Custom tracking events can be sent, and an identity may(or not) be specified. an Identity is persisted and can be called once per user identification, ofcourse it may be called again to update user's identity. An identity can be specified like this:
+
+```java
+    mWoorlds.identity("johndoe");
+```
+
+There are pre-defined tracking events that may be used by specifying a campaign id:
+
+```java
+    public void trackDownload(String campaignId);
+    public void trackInstall(String campaignId);
+    public void trackClick(String campaignId);
+    public void trackAction(String campaignId);
+```
+
+In order to create a custom tracking event you may specify event name, and additional data in a HashMap<String,Object>. Object can be any type of object which can be serialized using the jackson json serializer.
+```java
+    HashMap<String,Object> data = new HashMap<String,Object>();
+    data.put("click", "button1");
+    data.put("activity","welcome-screen");
+    mWoorlds.track("user-action", data);
+```
+For a working example please take a look at the [Demo Application](WoorldsDemo/src/com/example/woorldsdemo/DemoActivity.java)
+
+
 Woorlds Updates
 ===============
 This requires special permissions - please contact us
@@ -114,19 +142,3 @@ This requires special permissions - please contact us
     }
 ```
 
-Tracking
-========
-Custom tracking events can be sent, and an identity may(or not) be specified. an Identity is persisted and can be called once per user identification, ofcourse it may be called again to update user's identity. An identity can be specified like this:
-
-```java
-    mWoorlds.identity("johndoe");
-```
-
-In order to create a custom tracking event you may specify event name, and additional data in a HashMap<String,Object>. Object can be any type of object which can be serialized using the jackson json serializer.
-```java
-    HashMap<String,Object> data = new HashMap<String,Object>();
-    data.put("click", "button1");
-    data.put("activity","welcome-screen");
-    mWoorlds.track("user-action", data);
-```
-For a working example please take a look at the [Demo Application](WoorldsDemo/src/com/example/woorldsdemo/DemoActivity.java)
