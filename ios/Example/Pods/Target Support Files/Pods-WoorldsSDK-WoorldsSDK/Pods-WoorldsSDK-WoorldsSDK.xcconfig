@@ -1,0 +1,2 @@
+PODS_WOORLDSSDK_WOORLDSSDK_LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/WoorldsSdk"
+PODS_WOORLDSSDK_WOORLDSSDK_OTHER_LDFLAGS = -l"WoorldsSdk" -framework "CoreBluetooth" -framework "CoreLocation"

@@ -1,0 +1,42 @@
+PODS:
+  - AFNetworking (2.5.2):
+    - AFNetworking/NSURLConnection (= 2.5.2)
+    - AFNetworking/NSURLSession (= 2.5.2)
+    - AFNetworking/Reachability (= 2.5.2)
+    - AFNetworking/Security (= 2.5.2)
+    - AFNetworking/Serialization (= 2.5.2)
+    - AFNetworking/UIKit (= 2.5.2)
+  - AFNetworking/NSURLConnection (2.5.2):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.2):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.2)
+  - AFNetworking/Security (2.5.2)
+  - AFNetworking/Serialization (2.5.2)
+  - AFNetworking/UIKit (2.5.2):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - WoorldsSDK (0.1.1):
+    - AFNetworking (~> 2.5)
+
+DEPENDENCIES:
+  - WoorldsSDK (from `https://github.com/woorlds-sdk/pod.git`)
+
+EXTERNAL SOURCES:
+  WoorldsSDK:
+    :git: https://github.com/woorlds-sdk/pod.git
+
+CHECKOUT OPTIONS:
+  WoorldsSDK:
+    :commit: d249b82c1a4bb11462c569d8cdf362eed87e62a3
+    :git: https://github.com/woorlds-sdk/pod.git
+
+SPEC CHECKSUMS:
+  AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
+  WoorldsSDK: 17f6f3fffb06cdd85bf582715563c38c265388fd
+
+COCOAPODS: 0.36.3
