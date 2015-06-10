@@ -1,9 +1,6 @@
 Woorlds SDK
 ============
 
-Current build number: 465
-
-
 Welcome to the Woorlds SDK Readme file.
 
 In order to use Woorlds you will need to include the supplied jars in the [libs](WoorldsDemo/libs) folder in your project, if any of those libraries are already used by your project it is not needed to be added. please add it to your Java Build Path from your Project Properties (in eclipse) under Libraries.
@@ -73,6 +70,14 @@ whenever necessary you may query for the current segmentations:
 ```java
     List<Segment> segmentations = mWoorldsSDK.getSegmentations("some-campaign-id");
 ```
+
+Campaigns
+=========
+whenever necessary you may query for a recommended campaign_id:
+```java
+    String campaignId = mWoorldsSDK.getCampaign();
+```
+
 
 
 Tracking
