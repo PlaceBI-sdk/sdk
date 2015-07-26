@@ -64,13 +64,6 @@ You must instantiate the WoorldsSDK class to ensure service is started and call 
 
 ```
 
-Segmentations
-=============
-whenever necessary you may query for the current segmentations:
-```java
-    List<Segment> segmentations = mWoorldsSDK.getSegmentations("some-campaign-id");
-```
-
 Campaigns
 =========
 whenever necessary you may query for a recommended campaign_id:
