@@ -71,6 +71,26 @@ whenever necessary you may query for a recommended campaign_id:
     String campaignId = mWoorldsSDK.getCampaign();
 ```
 
+When you fire the constructor new WoorldsSDK() you need to wait for the onConnected() event to fire in order to have a fresh campaign id:
+so if you need to have the value ready as soon as an Activity starts you should:
+
+```java
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (getServiceSettingState()) {
+            mWoorldsSDK = new WoorldsSDK(this) {
+                @Override
+                public void onConnected() {                 
+                    super.onConnected();
+                    Log.i(TAG, "Current Campaign ID is: " + mWoorldsSDK.getCampaign()); 
+                }
+            };
+        }
+    }
+
+```
+
 
 
 Tracking
