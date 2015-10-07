@@ -23,7 +23,7 @@ The service definition should be unique by its name so multiple instances of the
     <service android:name="com.woorlds.woorldssdk.WoorldsService"/>
 ```
 
-The api key provided by woorlds should be specified in the manifest as well:
+In order to identify your app you need to specify the api key in the manifest, if you have not received your api key yet please send us mail to <support@woorlds.com>
 ```xml
     <meta-data
         android:name="com.woorlds.ApiKey"
