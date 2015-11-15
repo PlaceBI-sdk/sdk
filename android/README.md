@@ -83,7 +83,7 @@ so if you need to have the value ready as soon as an Activity starts you should:
                 @Override
                 public void onConnected() {                 
                     super.onConnected();
-                    Log.i(TAG, "Current Campaign ID is: " + mWoorldsSDK.getCampaign()); 
+                    Log.i(TAG, "Current Campaign ID is: " + mWoorldsSDK.getCampaign());
                 }
             };
         }
@@ -130,7 +130,7 @@ This requires special permissions - please contact us
     protected void onStart() {
         super.onStart();
         mWoorldsSDK = new WoorldsSDK(this);
-    
+
         WoorldsEventsReceiver eventsReceiver = new WoorldsEventsReceiver() {
             @Override
             public void woorldsError(String errorString) {
@@ -138,13 +138,13 @@ This requires special permissions - please contact us
                 Log.e(TAG, "Woorlds Error: " + errorString);
                 Toast.makeText(getApplicationContext(), "Error: " + errorString, Toast.LENGTH_SHORT).show();
             }
-        
+
             @Override
             public void woorldsDataUpdated(WoorldsData woorldsData) {
                 WoorldInfo inWoorld = null;
                 if (null != woorldsData.serverData && null != woorldsData.serverData.wifiWorlds) {
                     List<WoorldInfo> woorlds = woorldsData.serverData.wifiWorlds;
-                    
+
                     // find the world we are in
                     for (WoorldInfo woorld : woorlds) {
                         if (woorld.InWoorld) {
@@ -155,12 +155,20 @@ This requires special permissions - please contact us
                 if (inWoorld != null) {
                     Log.i(TAG, "We are in woorld: " + inWoorld.worldName);
                 }   // insert some logic here
-                
+
             }
         };
 
         mWoorldsSDK.registerWoorldsEvents(eventsReceiver);
     }
+```
+
+Notifications
+=============
+Server may push notifications according to rules defined in our dashboard. the small icon as defined by android notifications must be defined at least once, the value of the resource to be used as small icon will be persisted in shared preferences.
+
+```java
+ mWoorldsSDK.setNotificationSmallIcon(R.drawable.ic_launcher);
 ```
 
 If you have any questions, please write to <support@woorlds.com>.
