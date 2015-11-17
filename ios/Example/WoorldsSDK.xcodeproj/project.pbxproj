@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0686FCEA1A731B8A00B5B6B3 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0686FCE91A731B8A00B5B6B3 /* Crashlytics.framework */; };
 		0692FEFC1A90E536007A5A6B /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = 0692FEFB1A90E536007A5A6B /* green.png */; };
 		0866C075C905285865C46B54 /* libPods-WoorldsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 607DD4EF555AEDF1C1E7C98F /* libPods-WoorldsSDK.a */; };
 		1A7530F22EEA8E4592F660AB /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4650BD824997A666C4E86E3D /* libPods-Tests.a */; };
@@ -39,7 +38,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0686FCE91A731B8A00B5B6B3 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		0692FEFB1A90E536007A5A6B /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
 		4650BD824997A666C4E86E3D /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B28B7B58A33EDF644C5398C /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -79,7 +77,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
-				0686FCEA1A731B8A00B5B6B3 /* Crashlytics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
 				0866C075C905285865C46B54 /* libPods-WoorldsSDK.a in Frameworks */,
@@ -114,7 +111,6 @@
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
-				0686FCE91A731B8A00B5B6B3 /* Crashlytics.framework */,
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* WoorldsSDK */,
 				6003F5B5195388D20070C39A /* Tests */,
@@ -215,6 +211,7 @@
 				6003F588195388D20070C39A /* Resources */,
 				43032190033ABBC59CF3A4AC /* Copy Pods Resources */,
 				0686FCCF1A731A4700B5B6B3 /* ShellScript */,
+				7CD56786D49EDB3FF16DBFA9 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -234,6 +231,7 @@
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
 				EF7A465FF5B1262E49B492B1 /* Copy Pods Resources */,
+				D3AFF6757790D4F401863BA8 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -252,7 +250,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = WS;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Yehonatan Levi";
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
@@ -322,7 +320,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Crashlytics.framework/run 7bf629dbba391e4e5fd307b559b5343f7c4a02a7 3db6705e14338aa65690034ce889243bc1c47a1b188803f7de7000183f0e877b";
+			shellScript = "";
 		};
 		43032190033ABBC59CF3A4AC /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -339,6 +337,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WoorldsSDK/Pods-WoorldsSDK-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7CD56786D49EDB3FF16DBFA9 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WoorldsSDK/Pods-WoorldsSDK-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8552AF373FEE05E89FCE3933 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -352,6 +365,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D3AFF6757790D4F401863BA8 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D57B37EEEF998A3AAF60A646 /* Check Pods Manifest.lock */ = {
@@ -469,6 +497,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -543,6 +572,7 @@
 					"$(PROJECT_DIR)/Crashlytics.framework",
 					"$(PROJECT_DIR)/Crashlytics.framework/Versions/A",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -568,6 +598,7 @@
 					"$(PROJECT_DIR)/Crashlytics.framework",
 					"$(PROJECT_DIR)/Crashlytics.framework/Versions/A",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -590,6 +621,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -609,6 +641,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

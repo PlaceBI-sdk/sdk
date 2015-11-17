@@ -1,13 +1,10 @@
 {
   "name": "WoorldsSDK",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "summary": "Woorlds SDK",
-  "description": "                   Woorlds SDK for iPhone.\n",
+  "description": "Woorlds SDK for iPhone.",
   "homepage": "http://www.woorlds.com",
-  "license": {
-    "type": "Commercial",
-    "text": "            (c) Woorlds\n"
-  },
+  "license": "Commercial",
   "authors": {
     "leviyehonatan": "yehonatan@woorlds.com"
   },
@@ -18,19 +15,15 @@
     "git": "https://github.com/woorlds-sdk/pod.git"
   },
   "source_files": "*.h",
-  "resources": "VlcSdkRes.bundle",
   "frameworks": [
     "CoreLocation",
-    "CoreBluetooth"
+    "SystemConfiguration",
+    "CoreTelephony",
+    "AdSupport"
   ],
   "libraries": "WoorldsSdk",
   "preserve_paths": "libWoorldsSdk.a",
   "xcconfig": {
     "LIBRARY_SEARCH_PATHS": "\"$(PODS_ROOT)/WoorldsSdk\""
-  },
-  "dependencies": {
-    "AFNetworking": [
-      "~> 2.5"
-    ]
   }
 }
