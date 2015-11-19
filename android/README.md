@@ -171,4 +171,15 @@ Server may push notifications according to rules defined in our dashboard. the s
  mWoorldsSDK.setNotificationSmallIcon(R.drawable.ic_launcher);
 ```
 
+
+when notification is clicked by user the default launcher intent defined by the manifest will be sent, if you would like to define it you may do so by defining the following key in the Manifest.xml:
+
+```xml
+<meta-data
+    android:name="com.woorlds.notificationintent"
+    android:value="com.woorlds.woorldstestapp.triggerintent" />
+```
+
+all notifications will be redirected to that activity's intent filter.
+
 If you have any questions, please write to <support@woorlds.com>.
