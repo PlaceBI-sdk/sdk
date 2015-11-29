@@ -39,6 +39,14 @@ Location always authorization must be required from users, our SDK calls `reques
 
 Background Mode should also be enabled for location updates.
 
+## Swift
+
+if your project is using swift, all you need to do to make WoorldsSDK available for swift is to include it in a bridging header file:
+
+```objc
+#import <WoorldsSDK/WoorldsSDK.h>
+```
+
 ## Instance
 
 the class implemented in the library is defined in the `woorldsSDK.h` file
