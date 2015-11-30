@@ -129,22 +129,55 @@ A possible use case is to receive information about a places as the user engage 
         android:value="org.example.woorldsupdates" />
 ```
 
-then you can get a list of places and parse it
+and register a receiver or declare a filter in the manifest
+
+here's an example how to register in runtime
 ```java
-for (Map<String, ?> place : woorlds.getPlaces()) {
-
-    String brand_name = (String) place.get("brand_name");
-    String display_name = (String) place.get("display_name");
-    boolean in_place = (boolean) place.get("in_place");
-    Set<String> tags = (Set<String>) place.get("tags");
-    Map<String, ?> location = (Map<String, ?>) place.get("location");
-    if (location != null) {
-        double lat = (double) location.get("lat");
-        double lng = (double) location.get("lng");
-        String addr = (String) location.get("addr");
-        float distance = (float) location.get("distance");
+private BroadcastReceiver placesUpdateReceiver =  new BroadcastReceiver() {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        // code that uses data from woorlds.getPlaces()
     }
+}
 
+@Override
+protected void onPause() {
+    super.onPause();
+    unregisterReceiver(placesUpdateReceiver);
+}
+
+@Override
+protected void onResume() {
+    super.onResume();
+    registerReceiver(placesUpdateReceiver, new IntentFilter("com.woorlds.UpdatesReceiver"));
+}
+
+```
+
+then you may get the information parsed
+
+```java
+    Set<Place> places = woorlds.getParsedPlaces();
+```
+
+or if you wish you may parse it manually
+
+```java
+void parsePlaces() {
+    for (Map<String, ?> place : woorlds.getPlaces()) {
+
+        String brand_name = (String) place.get("brand_name");
+        String display_name = (String) place.get("display_name");
+        boolean in_place = (boolean) place.get("in_place");
+        Set<String> tags = (Set<String>) place.get("tags");
+        Map<String, ?> location = (Map<String, ?>) place.get("location");
+        if (location != null) {
+            double lat = (double) location.get("lat");
+            double lng = (double) location.get("lng");
+            String addr = (String) location.get("addr");
+            float distance = (float) location.get("distance");
+        }
+    }
 }
 ```
 
