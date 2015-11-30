@@ -112,6 +112,12 @@ In order to create a custom tracking event you may specify event name, and addit
 
 Notifications may be sent to to clients according to pre-set rules defined in http://dashboard.woorlds.com for more information refer to our website
 
+Server may push notifications according to rules defined in our dashboard. the small icon as defined by android notifications must be defined at least once, the value of the resource to be used as small icon will be persisted in shared preferences.
+
+```java
+ mWoorldsSDK.setNotificationSmallIcon(R.drawable.ic_launcher);
+```
+
 when a notification is clicked the default behavior is to start the default launcher activity. if you want to specify a different activity you may add the following meta data to your AndroidManifest.xml
 
 ```xml
@@ -119,6 +125,10 @@ when a notification is clicked the default behavior is to start the default laun
         android:name="com.woorlds.notificationintent"
         android:value="com.example.someintent" />
 ```
+
+all notifications will be redirected to that activity's intent filter.
+
+
 ## Updates
 
 A possible use case is to receive information about a places as the user engage them, and receive raw information offered about that place. You may be notified using an intent which you must define per application using a simple manifest key:
