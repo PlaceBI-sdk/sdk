@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="woorlds.com.woorldstest">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.woorlds.ApiKey"
+            android:value="32498ddc-f0de-4056-a77c-7dbaefe59536" />
+        <meta-data
+            android:name="com.woorlds.update.intent"
+            android:value="com.woorlds.example.UpdatesReceiver" />
+    </application>
+
+</manifest>

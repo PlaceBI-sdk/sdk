@@ -138,7 +138,7 @@ private BroadcastReceiver placesUpdateReceiver =  new BroadcastReceiver() {
     public void onReceive(Context context, Intent intent) {
         // code that uses data from woorlds.getPlaces()
     }
-}
+};
 
 @Override
 protected void onPause() {
@@ -157,7 +157,7 @@ protected void onResume() {
 then you may get the information parsed
 
 ```java
-    Set<Place> places = woorlds.getParsedPlaces();
+    Set<Woorlds.Place> places = woorlds.getParsedPlaces();
 ```
 
 or if you wish you may parse it manually
