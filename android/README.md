@@ -3,6 +3,11 @@ Woorlds SDK for Android
 
 This is the Android SDK for using the Woorlds offered capabilities
 
+
+## AAR - Android library
+
+the library is supplied in the demo project and an example of how to use it in your build.gradle is there too. When you want to update to a newer version just replace the .aar file.
+
 ## Manual
 
 include the main woorldsSDK.jar and its dependencies
@@ -75,7 +80,7 @@ Some users may alternatively receive segments instead
 
 ```java
   Woorlds woorlds = new Woorlds();
-  Stringp[]
+  Set<String> segments = woorlds.getSegmentations();
 ```
 
 ## Identity
@@ -164,32 +169,10 @@ protected void onResume() {
 
 ```
 
-then you may get the information parsed
+then you may get the information in this manner
 
 ```java
-    Set<Woorlds.Place> places = woorlds.getParsedPlaces();
-```
-
-or if you wish you may parse it manually
-
-```java
-void parsePlaces() {
-    for (Map<String, ?> place : woorlds.getPlaces()) {
-
-        String brand_name = (String) place.get("brand_name");
-        String display_name = (String) place.get("display_name");
-        boolean in_place = (boolean) place.get("in_place");
-        Set<String> tags = (Set<String>) place.get("tags");
-        Map<String, ?> location = (Map<String, ?>) place.get("location");
-        if (location != null) {
-            double lat = (double) location.get("lat");
-            double lng = (double) location.get("lng");
-            String addr = (String) location.get("addr");
-            float distance = (float) location.get("distance");
-        }
-    }
-}
-```
+    Set<Woorlds.Place> places = woorlds.getPlaces();
 
 For a working example please take a look at the [Demo Application](WoorldsDemo/src/com/example/woorldsdemo/DemoActivity.java)
 

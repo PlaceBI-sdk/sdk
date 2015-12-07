@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver placesUpdateReceiver =  new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Set<Woorlds.Place> places = woorlds.getParsedPlaces();
+            Set<Woorlds.Place> places = woorlds.getPlaces();
             for (Woorlds.Place place : places) {
             }
         }
