@@ -9,7 +9,7 @@ import android.os.Bundle;
 
 import com.woorlds.woorldssdk.Woorlds;
 
-import java.util.Set;
+import java.util.Collection;
 
 public class MainActivity extends AppCompatActivity {
     Woorlds woorlds;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver placesUpdateReceiver =  new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Set<Woorlds.Place> places = woorlds.getPlaces();
+            Collection<Woorlds.Place> places = woorlds.getPlaces();
             for (Woorlds.Place place : places) {
             }
         }

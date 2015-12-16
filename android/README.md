@@ -21,9 +21,8 @@ The following permissions are used in manifest.xml file
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 ```
-
-Android 6.0 Marshmallow users may need to ask the user for authorization for location services.
 
 if you are not using the library then you must attach the following system events to a receiver implemented in our libraries
 
@@ -41,7 +40,23 @@ if you are not using the library then you must attach the following system event
 
 ## Android Library
 
-Will be available soon
+place the .aar file in your libs directory and add this to your build.gradle:
+
+```
+
+repositories{
+    flatDir{
+        dirs 'libs'
+    }
+}
+
+dependencies {
+  compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-3595"
+  compile (name:'woorldssdk-release', ext:'aar')
+}
+
+```
+
 
 ## SDK Key
 
@@ -56,6 +71,11 @@ In order to identify your app you need to specify the api key in the manifest, <
 
 If you have not received your api key yet please send us mail to <support@woorlds.com> or go to http://www.woorlds.com for the sign up process
 
+## Marshmallow
+
+Android 6.0 Marshmallow users may need to ask the user for authorization for fine location permission,please make sure you ask for this permission as early as possible
+
+
 ## Instance
 
 An instance of the Woorlds object must receive the context of your application but it has a small footprint.
@@ -63,6 +83,11 @@ An instance of the Woorlds object must receive the context of your application b
 ```java
 Woorlds woorlds = new Woorlds(context);
 ```
+
+for analyzing user's beahviour we need as well to signal an application close by calling destory() on pausing
+
+```java
+
 
 ## Campaigns
 
@@ -136,17 +161,8 @@ all notifications will be redirected to that activity's intent filter.
 
 ## Updates
 
-A possible use case is to receive information about a places as the user engage them, and receive raw information offered about that place. You may be notified using an intent which you must define per application using a simple manifest key:
+A possible use case is to receive information about places as the user engage them, and receive raw information offered about that place. You may be notified using a local broadcast intent. This ability requires extended permissions, contact us for this feature.
 
-```xml
-    <meta-data
-        android:name="com.woorlds.update.intent"
-        android:value="org.example.woorldsupdates" />
-```
-
-and register a receiver or declare a filter in the manifest
-
-here's an example how to register in runtime
 ```java
 private BroadcastReceiver placesUpdateReceiver =  new BroadcastReceiver() {
     @Override
@@ -158,21 +174,21 @@ private BroadcastReceiver placesUpdateReceiver =  new BroadcastReceiver() {
 @Override
 protected void onPause() {
     super.onPause();
-    unregisterReceiver(placesUpdateReceiver);
+    LocalBroadcastManager.getInstance(this).unregisterReceiver(placesUpdateReceiver);
 }
 
 @Override
 protected void onResume() {
     super.onResume();
-    registerReceiver(placesUpdateReceiver, new IntentFilter("com.woorlds.UpdatesReceiver"));
+    LocalBroadcastManager.getInstance(this).registerReceiver(placesUpdateReceiver, new IntentFilter("com.woorlds.update.intent"));
 }
 
 ```
 
-then you may get the information in this manner
+then you may get the information in this manner on the receiver
 
 ```java
-    Set<Woorlds.Place> places = woorlds.getPlaces();
+    Collection<Woorlds.Place> places = woorlds.getPlaces();
 
 For a working example please take a look at the [Demo Application](WoorldsDemo/src/com/example/woorldsdemo/DemoActivity.java)
 
