@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'DF77660CD2E7E094FF7C572E'
+               BlueprintIdentifier = '49258AF1A22CE60C28F55E81'
                BlueprintName = 'Pods-WoorldsSDK'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libPods-WoorldsSDK.a'>

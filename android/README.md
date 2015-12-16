@@ -1,105 +1,124 @@
-Woorlds SDK
-============
+Woorlds SDK for Android
+=======================
 
-Welcome to the Woorlds SDK Readme file.
+This is the Android SDK for using the Woorlds offered capabilities
 
-In order to use Woorlds you will need to include the supplied jars in the [libs](WoorldsDemo/libs) folder in your project, if any of those libraries are already used by your project it is not needed to be added. please add it to your Java Build Path from your Project Properties (in eclipse) under Libraries.
 
-the next step is to alter the AndroidManifest.xml.
+## AAR - Android library
 
-The service requires the following permissions in order to function properly, please add them to your AndroidManifest.xml:
+the library is supplied in the demo project and an example of how to use it in your build.gradle is there too. When you want to update to a newer version just replace the .aar file.
+
+## Manual
+
+include the main woorldsSDK.jar and its dependencies
+
+The following permissions are used in manifest.xml file
+
 ```xml
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 ```
-The service definition should be unique by its name so multiple instances of the service can co-exist:
+
+if you are not using the library then you must attach the following system events to a receiver implemented in our libraries
 
 ```xml
-    <service android:name="com.woorlds.woorldssdk.WoorldsService"/>
+<application >
+    <receiver android:name=".Woorlds$GeneralReceiver">
+        <intent-filter>
+            <action android:name="android.net.wifi.SCAN_RESULTS" />
+            <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            <action android:name="com.woorlds.message" />
+        </intent-filter>
+    </receiver>
+</application>
 ```
 
-In order to identify your app you need to specify the api key in the manifest, if you have not received your api key yet please send us mail to <support@woorlds.com>
+## Android Library
+
+place the .aar file in your libs directory and add this to your build.gradle:
+
+```
+
+repositories{
+    flatDir{
+        dirs 'libs'
+    }
+}
+
+dependencies {
+  compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-3595"
+  compile (name:'woorldssdk-release', ext:'aar')
+}
+
+```
+
+
+## SDK Key
+
+An SDK key must be provided in the manifest.xml
+
+In order to identify your app you need to specify the api key in the manifest, <support@woorlds.com>
 ```xml
     <meta-data
         android:name="com.woorlds.ApiKey"
         android:value="your-api-key" />
 ```
 
-Please contact info@woorlds.com for a unique key for your application.
+If you have not received your api key yet please send us mail to <support@woorlds.com> or go to http://www.woorlds.com for the sign up process
 
-To allow the service to start at device boot add the following receiver:
-```xml
-    <receiver android:name="com.woorlds.woorldssdk.StartupReceiver" >
-        <intent-filter>
-            <action android:name="android.intent.action.BOOT_COMPLETED" />
-        </intent-filter>
-    </receiver>
-```
-For reference please see the full [AndroidManifest.xml](WoorldsDemo/AndroidManifest.xml).
+## Marshmallow
+
+Android 6.0 Marshmallow users may need to ask the user for authorization for fine location permission,please make sure you ask for this permission as early as possible
 
 
-You must instantiate the WoorldsSDK class to ensure service is started and call destroy() when activity stops to ensure proper disconnection from the service:
-```java
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mWoorldsSDK == null) {
-            mWoorldsSDK = new WoorldsSDK(this);
-        }
-    }
+## Instance
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mWoorldsSDK != null) {
-            mWoorldsSDK.destroy();
-            mWoorldsSDK = null;
-        }
-    }
-
-```
-
-Campaigns
-=========
-whenever necessary you may query for a recommended campaign_id:
-```java
-    String campaignId = mWoorldsSDK.getCampaign();
-```
-
-When you fire the constructor new WoorldsSDK() you need to wait for the onConnected() event to fire in order to have a fresh campaign id:
-so if you need to have the value ready as soon as an Activity starts you should:
+An instance of the Woorlds object must receive the context of your application but it has a small footprint.
 
 ```java
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (getServiceSettingState()) {
-            mWoorldsSDK = new WoorldsSDK(this) {
-                @Override
-                public void onConnected() {                 
-                    super.onConnected();
-                    Log.i(TAG, "Current Campaign ID is: " + mWoorldsSDK.getCampaign());
-                }
-            };
-        }
-    }
-
+Woorlds woorlds = new Woorlds(context);
 ```
 
-
-
-Tracking
-========
-Custom tracking events can be sent, and an identity may(or not) be specified. an Identity is persisted and can be called once per user identification, ofcourse it may be called again to update user's identity. An identity can be specified like this:
+for analyzing user's beahviour we need as well to signal an application close by calling destory() on pausing
 
 ```java
-    mWoorlds.identity("johndoe");
+
+
+## Campaigns
+
+When you need to display an ad you should make sure you have an instance of the Woorlds object and call the getCampaign() method, the method returns a string which can be used to hint your system which information to present according to server set criteria.
+
+```java
+Woorlds woorlds = new Woorlds(context);
+String campaign = woorlds.getCampaign();
+showAd(campaign);
 ```
+
+## Segment
+
+Some users may alternatively receive segments instead
+
+```java
+  Woorlds woorlds = new Woorlds();
+  Set<String> segments = woorlds.getSegmentations();
+```
+
+## Identity
+
+When your user provides some concrete identity you may attach that identity to the tracked events and activity using
+
+```java
+    woorlds.identity("johndoe");
+```
+
+## Tracking
+
+A track is an event sent to server upon a sepecific event or user interaction of your application.
 
 There are pre-defined tracking events that may be used by specifying a campaign id:
 
@@ -110,76 +129,67 @@ There are pre-defined tracking events that may be used by specifying a campaign 
     public void trackAction(String campaignId);
 ```
 
-In order to create a custom tracking event you may specify event name, and additional data in a HashMap<String,Object>. Object can be any type of object which can be serialized using the jackson json serializer.
+In order to create a custom tracking event you may specify event name, and additional data in a HashMap<String,Object>. Object can be any type that a JSON serializer can handle.
+
 ```java
     HashMap<String,Object> data = new HashMap<String,Object>();
     data.put("click", "button1");
     data.put("activity","welcome-screen");
-    mWoorlds.track("user-action", data);
-```
-For a working example please take a look at the [Demo Application](WoorldsDemo/src/com/example/woorldsdemo/DemoActivity.java)
-
-
-Woorlds Updates
-===============
-This requires special permissions - please contact us
-
-
-```java
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mWoorldsSDK = new WoorldsSDK(this);
-
-        WoorldsEventsReceiver eventsReceiver = new WoorldsEventsReceiver() {
-            @Override
-            public void woorldsError(String errorString) {
-                // write it to log
-                Log.e(TAG, "Woorlds Error: " + errorString);
-                Toast.makeText(getApplicationContext(), "Error: " + errorString, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void woorldsDataUpdated(WoorldsData woorldsData) {
-                WoorldInfo inWoorld = null;
-                if (null != woorldsData.serverData && null != woorldsData.serverData.wifiWorlds) {
-                    List<WoorldInfo> woorlds = woorldsData.serverData.wifiWorlds;
-
-                    // find the world we are in
-                    for (WoorldInfo woorld : woorlds) {
-                        if (woorld.InWoorld) {
-                            inWoorld = woorld;
-                        }
-                    }
-                }
-                if (inWoorld != null) {
-                    Log.i(TAG, "We are in woorld: " + inWoorld.worldName);
-                }   // insert some logic here
-
-            }
-        };
-
-        mWoorldsSDK.registerWoorldsEvents(eventsReceiver);
-    }
+    woorlds.track("user-action", data);
 ```
 
-Notifications
-=============
+## Notifications
+
+Notifications may be sent to to clients according to pre-set rules defined in http://dashboard.woorlds.com for more information refer to our website
+
 Server may push notifications according to rules defined in our dashboard. the small icon as defined by android notifications must be defined at least once, the value of the resource to be used as small icon will be persisted in shared preferences.
 
 ```java
  mWoorldsSDK.setNotificationSmallIcon(R.drawable.ic_launcher);
 ```
 
-
-when notification is clicked by user the default launcher intent defined by the manifest will be sent, if you would like to define it you may do so by defining the following key in the Manifest.xml:
+when a notification is clicked the default behavior is to start the default launcher activity. if you want to specify a different activity you may add the following meta data to your AndroidManifest.xml
 
 ```xml
-<meta-data
-    android:name="com.woorlds.notificationintent"
-    android:value="com.woorlds.woorldstestapp.triggerintent" />
+    <meta-data
+        android:name="com.woorlds.notificationintent"
+        android:value="com.example.someintent" />
 ```
 
 all notifications will be redirected to that activity's intent filter.
+
+
+## Updates
+
+A possible use case is to receive information about places as the user engage them, and receive raw information offered about that place. You may be notified using a local broadcast intent. This ability requires extended permissions, contact us for this feature.
+
+```java
+private BroadcastReceiver placesUpdateReceiver =  new BroadcastReceiver() {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        // code that uses data from woorlds.getPlaces()
+    }
+};
+
+@Override
+protected void onPause() {
+    super.onPause();
+    LocalBroadcastManager.getInstance(this).unregisterReceiver(placesUpdateReceiver);
+}
+
+@Override
+protected void onResume() {
+    super.onResume();
+    LocalBroadcastManager.getInstance(this).registerReceiver(placesUpdateReceiver, new IntentFilter("com.woorlds.update.intent"));
+}
+
+```
+
+then you may get the information in this manner on the receiver
+
+```java
+    Collection<Woorlds.Place> places = woorlds.getPlaces();
+
+For a working example please take a look at the [Demo Application](WoorldsDemo/src/com/example/woorldsdemo/DemoActivity.java)
 
 If you have any questions, please write to <support@woorlds.com>.
