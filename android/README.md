@@ -191,6 +191,6 @@ then you may get the information in this manner on the receiver
     Collection<Woorlds.Place> places = woorlds.getPlaces();
 ```
 
-For a working example please take a look at the [Demo Application](WoorldsDemo/src/com/example/woorldsdemo/DemoActivity.java)
+For a working example please take a look at the [Demo Application](WoorldsTest/app/src/main/java/woorlds/com/woorldstest/MainActivity.java)
 
 If you have any questions, please write to <support@woorlds.com>.
