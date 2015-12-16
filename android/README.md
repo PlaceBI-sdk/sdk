@@ -189,6 +189,7 @@ then you may get the information in this manner on the receiver
 
 ```java
     Collection<Woorlds.Place> places = woorlds.getPlaces();
+```
 
 For a working example please take a look at the [Demo Application](WoorldsDemo/src/com/example/woorldsdemo/DemoActivity.java)
 
