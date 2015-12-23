@@ -101,7 +101,7 @@ A possible use case is to receive information about a places as the user engages
 ```
 the data is a dictionary with a single "places" entry which is structured as list of places with this information for example
 
-'''text
+'''
 (
   "places":
     {
