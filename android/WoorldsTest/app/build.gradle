@@ -29,7 +29,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-3595"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-4583"
     compile 'com.google.code.gson:gson:2.4'
     compile (name:'woorldssdk-release', ext:'aar')
 }

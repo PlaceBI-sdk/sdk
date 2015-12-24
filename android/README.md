@@ -51,7 +51,7 @@ repositories{
 }
 
 dependencies {
-  compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-3595"
+  compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-4583"
   compile (name:'woorldssdk-release', ext:'aar')
 }
 
