@@ -1,0 +1,19 @@
+PODS:
+  - WoorldsSDK (0.1.3)
+
+DEPENDENCIES:
+  - WoorldsSDK (from `https://github.com/woorlds-sdk/pod.git`)
+
+EXTERNAL SOURCES:
+  WoorldsSDK:
+    :git: https://github.com/woorlds-sdk/pod.git
+
+CHECKOUT OPTIONS:
+  WoorldsSDK:
+    :commit: e65588546883146aeca0cc1debb8a53975627703
+    :git: https://github.com/woorlds-sdk/pod.git
+
+SPEC CHECKSUMS:
+  WoorldsSDK: 657d83f2a9afc4f2c56a3cd62cc6e989baf6e06b
+
+COCOAPODS: 0.39.0

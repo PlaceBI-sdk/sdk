@@ -39,6 +39,14 @@ Location always authorization must be required from users, our SDK calls `reques
 
 Background Mode should also be enabled for location updates.
 
+
+##  Transport Security
+
+please follow the instructions on this link to override security settings, we will supply a secure transport very soon.
+
+use the information here to override it:
+http://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http
+
 ## Instance
 
 the class implemented in the library is defined in the `woorldsSDK.h` file
@@ -87,6 +95,34 @@ In order to create a custom tracking event you may specify event name, and addit
 
 ```objc
 [woorldsSDK track:@"clicked" :@{@"button-name": @"send", @"section": @"news"}]
+```
+
+## Notifications
+
+in order to support notification analytics please incorporate the following to your AppDelegate code:
+
+```swift
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    woorlds?.processLaunchOptions(launchOptions)
+    return true
+}
+
+func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+    woorlds?.processUserInfo(notification.userInfo)
+}
+```
+
+```objc
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  [[WoorldsSDK sharedInstance] processLaunchOptions:launchOptions];
+  return YES;
+}
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [[WoorldsSDK sharedInstance] processUserInfo:notification.userInfo];
+}
+
 ```
 
 ## Updates

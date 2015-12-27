@@ -1,9 +1,0 @@
-source 'https://github.com/CocoaPods/Specs.git'
-
-target 'WoorldsSDK', :exclusive => true do
-  pod "WoorldsSDK", :git => 'https://github.com/woorlds-sdk/pod.git'
-end
-
-target 'Tests', :exclusive => true do
-  pod "WoorldsSDK", :git => 'https://github.com/woorlds-sdk/pod.git'
-end

@@ -1,0 +1,5 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'Woorlds', :exclusive => true do
+  pod "WoorldsSDK", :git => 'https://github.com/woorlds-sdk/pod.git'
+end
