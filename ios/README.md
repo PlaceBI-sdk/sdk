@@ -130,10 +130,15 @@ func application(application: UIApplication, didReceiveLocalNotification notific
 A possible use case is to receive information about a places as the user engages them, and receive raw information offered about that place. You may be notified by providing a delegate instance which conforms to the WoorldsSDKDelegate protocol:
 
 ```objc
-@protocol WoorldsSDKDelegate
-@required
--(void)woorldsDataDidUpdate:(NSDictionary *)data;
-@end
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(placesUpdated:) name:@"placesUpdated" object:nil];
+
+-(void)placesUpdated:(NSNotification *)notification {
+    if ([notification.name isEqualToString:@"woorldsUpdate"]) {
+        NSArray *places = [woorldsSDK getPlaces];
+        // do something with places
+    }
+}
+
 ```
 the data is a dictionary with a single "places" entry which is structured as list of places with this information for example
 
