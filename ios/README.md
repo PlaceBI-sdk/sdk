@@ -140,12 +140,10 @@ A possible use case is to receive information about a places as the user engages
 }
 
 ```
-the data is a dictionary with a single "places" entry which is structured as list of places with this information for example
+the data is an array of dictionaries each is a place
 
 ```
-(
-  "places":
-    {
+[    {
   "in_place" = true;
   "brand_name" = apple;
   "display_name" = "5_infinite_loop__cupertino";
@@ -158,5 +156,5 @@ the data is a dictionary with a single "places" entry which is structured as lis
   tags =             (
       "electronics_store"
   );
-
+, ...]
 ```
