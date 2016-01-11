@@ -83,6 +83,8 @@ Woorlds woorlds = new Woorlds(context);
 for analyzing user's beahviour we need as well to signal an application close by calling destory() on pausing
 
 ```java
+woorlds.destroy();
+```
 
 
 ## Campaigns
