@@ -3,10 +3,24 @@ Woorlds SDK for Android
 
 This is the Android SDK for using the Woorlds offered capabilities
 
+## Android Studio - Gradle
 
-## AAR - Android library
+```
+repositories{
+  maven { url 'https://raw.github.com/woorlds-sdk/android-sdk/master' }
+}
 
-the library is supplied in the demo project and an example of how to use it in your build.gradle is there too. When you want to update to a newer version just replace the .aar file.
+dependencies {
+  compile "com.woorlds:woorldssdk:1.0.2@aar"
+  compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-4583"
+  compile 'com.google.code.gson:gson:2.4'
+
+  // for utilizing beacons(experimental)
+  //compile 'com.estimote:sdk:0.9.4@aar'
+}
+
+```
+
 
 ## Manual
 
@@ -38,24 +52,6 @@ if you are not using the library then you must attach the following system event
 </application>
 ```
 
-## Android Library
-
-place the .aar file in your libs directory and add this to your build.gradle:
-
-```
-
-repositories{
-    flatDir{
-        dirs 'libs'
-    }
-}
-
-dependencies {
-  compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-4583"
-  compile (name:'woorldssdk-release', ext:'aar')
-}
-
-```
 
 
 ## SDK Key
