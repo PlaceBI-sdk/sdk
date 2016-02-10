@@ -11,8 +11,8 @@ repositories{
 }
 
 dependencies {
-  compile "com.woorlds:woorldssdk:1.0.2@aar"
-  compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-4583"
+  compile "com.woorlds:woorldssdk:1.0.3@aar"
+  compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0-rc-1036"
   compile 'com.google.code.gson:gson:2.4'
 
   // for utilizing beacons(experimental)
