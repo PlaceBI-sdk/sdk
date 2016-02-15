@@ -11,7 +11,7 @@ repositories{
 }
 
 dependencies {
-  compile "com.woorlds:woorldssdk:1.0.3@aar"
+  compile "com.woorlds:woorldssdk:1.0.4@aar"
   compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0-rc-1036"
   compile 'com.google.code.gson:gson:2.4'
 
