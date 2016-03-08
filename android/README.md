@@ -11,12 +11,9 @@ repositories{
 }
 
 dependencies {
-  compile "com.woorlds:woorldssdk:1.0.4@aar"
-  compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0-rc-1036"
+  compile "com.woorlds:woorldssdk:1.0.11@aar"
+  compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0"
   compile 'com.google.code.gson:gson:2.4'
-
-  // for utilizing beacons(experimental)
-  //compile 'com.estimote:sdk:0.9.4@aar'
 }
 
 ```
