@@ -11,8 +11,8 @@ repositories{
 }
 
 dependencies {
-  compile "com.woorlds:woorldssdk:1.0.11@aar"
-  compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0"
+  compile "com.woorlds:woorldssdk:1.0.14@aar"
+  compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.2"
   compile 'com.google.code.gson:gson:2.4'
 }
 
@@ -44,6 +44,8 @@ if you are not using the library then you must attach the following system event
             <action android:name="android.net.wifi.SCAN_RESULTS" />
             <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
             <action android:name="com.woorlds.message" />
+            <action android:name="com.woorlds.notification" />
+            <action android:name="com.woorlds.notificationclicked" />
         </intent-filter>
     </receiver>
 </application>
