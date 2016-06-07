@@ -11,7 +11,7 @@ repositories{
 }
 
 dependencies {
-  compile "com.woorlds:woorldssdk:1.0.11@aar"
+  compile "com.woorlds:woorldssdk:1.0.14@aar"
   compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0"
   compile 'com.google.code.gson:gson:2.4'
 }
@@ -153,6 +153,7 @@ when a notification is clicked the default behavior is to start the default laun
 
 all notifications will be redirected to that activity's intent filter.
 
+you may disable notifications for your application by calling to `woorlds.setNotificationsEnabled(false)` or vice versa.
 
 ## Updates
 
