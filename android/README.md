@@ -11,24 +11,22 @@ repositories{
 }
 
 dependencies {
-  compile "com.woorlds:woorldssdk:1.0.14@aar"
-  compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0"
+  compile 'com.woorlds:woorldssdk:1.0.14@aar'
+  compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.2'
   compile 'com.google.code.gson:gson:2.4'
 }
 
 ```
 
-
 ## Manual
 
-include the main woorldsSDK.jar and its dependencies
+get the latest .aar from our repository on github: https://github.com/woorlds-sdk/android-sdk/tree/master/com/woorlds/woorldssdk/ and rename the .aar to .jar and include it with the dependencies, which you can find on http://mvnrepository.com/ and download the files manually.
 
 The following permissions are used in manifest.xml file
 
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -39,13 +37,16 @@ if you are not using the library then you must attach the following system event
 
 ```xml
 <application >
-    <receiver android:name=".Woorlds$GeneralReceiver">
+    <receiver android:name="com.woorlds.woorldssdk.Woorlds$GeneralReceiver">
         <intent-filter>
             <action android:name="android.net.wifi.SCAN_RESULTS" />
-            <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            <action android:name="android.net.wifi.STATE_CHANGE" />
             <action android:name="com.woorlds.message" />
+            <action android:name="com.woorlds.notification" />
+            <action android:name="com.woorlds.notificationclicked" />
         </intent-filter>
     </receiver>
+    <service android:exported="false" android:name="com.woorlds.woorldssdk.Service"/>
 </application>
 ```
 
@@ -68,6 +69,9 @@ If you have not received your api key yet please send us mail to <support@woorld
 
 Android 6.0 Marshmallow users may need to ask the user for authorization for fine location permission,please make sure you ask for this permission as early as possible
 
+```java
+    ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 0);
+```
 
 ## Instance
 
