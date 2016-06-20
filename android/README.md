@@ -11,7 +11,7 @@ repositories{
 }
 
 dependencies {
-  compile 'com.woorlds:woorldssdk:1.0.14@aar'
+  compile 'com.woorlds:woorldssdk:1.0.15@aar'
   compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.2'
   compile 'com.google.code.gson:gson:2.4'
 }
@@ -20,7 +20,7 @@ dependencies {
 
 ## Manual
 
-get the latest .aar from our repository on github: https://github.com/woorlds-sdk/android-sdk/tree/master/com/woorlds/woorldssdk/ and rename the .aar to .jar and include it with the dependencies, which you can find on http://mvnrepository.com/ and download the files manually.
+get the latest .aar from our repository on github: https://github.com/woorlds-sdk/android-sdk/tree/master/com/woorlds/woorldssdk/ and rename the .aar to .jar and extract it, then take within the classes.jar and rename it to woorldssdk.jar to include it with the dependencies, which you can find on http://mvnrepository.com/ and download the files manually.
 
 The following permissions are used in manifest.xml file
 
@@ -37,7 +37,7 @@ if you are not using the library then you must attach the following system event
 
 ```xml
 <application >
-    <receiver android:name="com.woorlds.woorldssdk.Woorlds$GeneralReceiver">
+    <receiver android:name="com.woorlds.woorldssdk.Receiver">
         <intent-filter>
             <action android:name="android.net.wifi.SCAN_RESULTS" />
             <action android:name="android.net.wifi.STATE_CHANGE" />
@@ -49,8 +49,6 @@ if you are not using the library then you must attach the following system event
     <service android:exported="false" android:name="com.woorlds.woorldssdk.Service"/>
 </application>
 ```
-
-
 
 ## SDK Key
 
