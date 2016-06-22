@@ -189,6 +189,29 @@ then you may get the information in this manner on the receiver
     Collection<Woorlds.Place> places = woorlds.getPlaces();
 ```
 
+
+## Enabling/Disabling
+
+Although we have means to disable the client activity from the server, you may
+choose to disable from client side. you may choose the default behavior which is
+set to enabled by default. Adding a meta-data value to the AndroidManifest.xml
+can change it.
+
+```xml
+<meta-data
+    android:name="com.woorlds.sdk.enabled.default"
+    android:value="false" />
+```
+
+At runtime you may use the setEnabled/getEnabled to change/query the current
+state.
+
+
+```java
+    woorlds.setEnabled(true);
+```
+
+
 For a working example please take a look at the [Demo Application](WoorldsTest/app/src/main/java/woorlds/com/woorldstest/MainActivity.java)
 
 If you have any questions, please write to <support@woorlds.com>.
