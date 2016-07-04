@@ -158,7 +158,15 @@ all notifications will be redirected to that activity's intent filter.
 
 ## Updates
 
-A possible use case is to receive information about places as the user engage them, and receive raw information offered about that place. You may be notified using a local broadcast intent. This ability requires extended permissions, contact us for this feature.
+A possible use case is to receive information about places as the user engage them, and receive raw information offered about that place. You may be notified using a local broadcast intent.
+
+```xml
+    <receiver android:name=".Receiver">
+        <intent-filter>
+            <action android:name="com.woorlds.update.intent" />
+        </intent-filter>
+    </receiver>
+```
 
 ```java
 private BroadcastReceiver placesUpdateReceiver =  new BroadcastReceiver() {
