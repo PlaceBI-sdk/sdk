@@ -13,7 +13,8 @@ pod "WoorldsSDK", :git => 'https://github.com/woorlds-sdk/pod.git'
 
 ## Manual
 
-If you are not using Cocoapods then a static library file can be found at https://github.com/woorlds-sdk/pod and the header file to be used with it
+If you are not using Cocoapods then a static library file can be found at https://github.com/woorlds-sdk/pod and the header file to be used with it.
+Please make sure the frameworks defined in the podspec are added to your project's Linked Frameworks and Libraries section.
 
 ## SDK key
 
@@ -116,11 +117,15 @@ func application(application: UIApplication, didReceiveLocalNotification notific
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [[WoorldsSDK sharedInstance] processLaunchOptions:launchOptions];
+  if (application.applicationState == UIApplicationStateActive ) {
+    [[WoorldsSDK sharedInstance] processLaunchOptions:launchOptions];
+  }
   return YES;
 }
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+  if (application.applicationState == UIApplicationStateActive ) {
     [[WoorldsSDK sharedInstance] processUserInfo:notification.userInfo];
+  }
 }
 
 ```

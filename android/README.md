@@ -11,24 +11,27 @@ repositories{
 }
 
 dependencies {
+<<<<<<< HEAD
   compile "com.woorlds:woorldssdk:1.0.14@aar"
   compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.2"
+=======
+  compile 'com.woorlds:woorldssdk:1.0.18@aar'
+  compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.2'
+>>>>>>> origin/master
   compile 'com.google.code.gson:gson:2.4'
 }
 
 ```
 
-
 ## Manual
 
-include the main woorldsSDK.jar and its dependencies
+get the latest .aar from our repository on github: https://github.com/woorlds-sdk/android-sdk/tree/master/com/woorlds/woorldssdk/ and rename the .aar to .jar and extract it, then take within the classes.jar and rename it to woorldssdk.jar to include it with the dependencies, which you can find on http://mvnrepository.com/ and download the files manually.
 
 The following permissions are used in manifest.xml file
 
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -39,19 +42,18 @@ if you are not using the library then you must attach the following system event
 
 ```xml
 <application >
-    <receiver android:name=".Woorlds$GeneralReceiver">
+    <receiver android:name="com.woorlds.woorldssdk.Receiver">
         <intent-filter>
             <action android:name="android.net.wifi.SCAN_RESULTS" />
-            <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            <action android:name="android.net.wifi.STATE_CHANGE" />
             <action android:name="com.woorlds.message" />
             <action android:name="com.woorlds.notification" />
             <action android:name="com.woorlds.notificationclicked" />
         </intent-filter>
     </receiver>
+    <service android:exported="false" android:name="com.woorlds.woorldssdk.Service"/>
 </application>
 ```
-
-
 
 ## SDK Key
 
@@ -70,6 +72,9 @@ If you have not received your api key yet please send us mail to <support@woorld
 
 Android 6.0 Marshmallow users may need to ask the user for authorization for fine location permission,please make sure you ask for this permission as early as possible
 
+```java
+    ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 0);
+```
 
 ## Instance
 
@@ -155,6 +160,7 @@ when a notification is clicked the default behavior is to start the default laun
 
 all notifications will be redirected to that activity's intent filter.
 
+you may disable notifications for your application by calling to `woorlds.setNotificationsEnabled(false)` or vice versa.
 
 ## Updates
 
@@ -195,6 +201,29 @@ then you may get the information in this manner on the receiver
 ```java
     Collection<Woorlds.Place> places = woorlds.getPlaces();
 ```
+
+
+## Enabling/Disabling
+
+Although we have means to disable the client activity from the server, you may
+choose to disable from client side. you may choose the default behavior which is
+set to enabled by default. Adding a meta-data value to the AndroidManifest.xml
+can change it.
+
+```xml
+<meta-data
+    android:name="com.woorlds.sdk.enabled.default"
+    android:value="false" />
+```
+
+At runtime you may use the setEnabled/getEnabled to change/query the current
+state.
+
+
+```java
+    woorlds.setEnabled(true);
+```
+
 
 For a working example please take a look at the [Demo Application](WoorldsTest/app/src/main/java/woorlds/com/woorldstest/MainActivity.java)
 
