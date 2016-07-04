@@ -15,7 +15,7 @@ dependencies {
   compile "com.woorlds:woorldssdk:1.0.14@aar"
   compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.2"
 =======
-  compile 'com.woorlds:woorldssdk:1.0.18@aar'
+  compile 'com.woorlds:woorldssdk:1.0.19@aar'
   compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.2'
 >>>>>>> origin/master
   compile 'com.google.code.gson:gson:2.4'
