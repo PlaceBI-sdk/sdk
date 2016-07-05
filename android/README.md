@@ -174,7 +174,7 @@ A possible use case is to receive information about places as the user engage th
 private BroadcastReceiver placesUpdateReceiver =  new BroadcastReceiver() {
     @Override
     public void onReceive(Context context, Intent intent) {
-        // code that uses data from woorlds.getPlaces()
+        // code that uses data from woorlds.getPlaces() / woorlds.getMyPlace();
     }
 };
 
@@ -189,14 +189,18 @@ protected void onResume() {
     super.onResume();
     LocalBroadcastManager.getInstance(this).registerReceiver(placesUpdateReceiver, new IntentFilter("com.woorlds.update.intent"));
 }
-
 ```
 
-then you may get the information in this manner on the receiver
+## Get place/places
+
+In order to get user current place/places, you can call this methods
 
 ```java
     Collection<Woorlds.Place> places = woorlds.getPlaces();
+    //return Collection of places (include also the near by places) or empty Collection
+
     Woorlds.Place place = woorlds.getMyPlace();
+    //return Woorlds.Place or null
 ```
 
 
