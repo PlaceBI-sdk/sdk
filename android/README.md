@@ -11,13 +11,9 @@ repositories{
 }
 
 dependencies {
-<<<<<<< HEAD
-  compile "com.woorlds:woorldssdk:1.0.14@aar"
-  compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.2"
-=======
-  compile 'com.woorlds:woorldssdk:1.0.19@aar'
+
+  compile 'com.woorlds:woorldssdk:1.0.21@aar'
   compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.2'
->>>>>>> origin/master
   compile 'com.google.code.gson:gson:2.4'
 }
 
@@ -200,6 +196,7 @@ then you may get the information in this manner on the receiver
 
 ```java
     Collection<Woorlds.Place> places = woorlds.getPlaces();
+    Woorlds.Place place = woorlds.getMyPlace();
 ```
 
 
@@ -223,6 +220,15 @@ state.
 ```java
     woorlds.setEnabled(true);
 ```
+
+## proguard-rules.pro
+-dontwarn com.woorlds.woorldssdk.**
+
+-keep class com.woorlds.woorldssdk.**
+-keepclassmembers class com.woorlds.woorldssdk.** { *; }
+
+-keep class com.google.android.gms.ads.identifier.**
+-keepclassmembers class com.google.android.gms.ads.identifier.** { *; }
 
 
 For a working example please take a look at the [Demo Application](WoorldsTest/app/src/main/java/woorlds/com/woorldstest/MainActivity.java)
