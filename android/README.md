@@ -197,7 +197,7 @@ In order to get user current place/places, you can call this methods
 
 ```java
     Collection<Woorlds.Place> places = woorlds.getPlaces();
-    //return Collection of places (include also the near by places) or empty Collection
+    //return Collection of places (include near by places) or empty Collection
 
     Woorlds.Place place = woorlds.getMyPlace();
     //return Woorlds.Place or null
