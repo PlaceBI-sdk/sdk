@@ -12,7 +12,7 @@ repositories{
 
 dependencies {
 
-  compile 'com.woorlds:woorldssdk:1.0.21@aar'
+  compile 'com.woorlds:woorldssdk:1.0.22@aar'
   compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.2'
   compile 'com.google.code.gson:gson:2.4'
 }
@@ -140,10 +140,10 @@ In order to create a custom tracking event you may specify event name, and addit
 
 Notifications may be sent to to clients according to pre-set rules defined in http://dashboard.woorlds.com for more information refer to our website
 
-Server may push notifications according to rules defined in our dashboard. the small icon as defined by android notifications must be defined at least once, the value of the resource to be used as small icon will be persisted in shared preferences.
+Server may push notifications according to rules defined in our dashboard. the small icon as defined by android notifications must be defined at least once, the value of the resource to be used as small icon will be persisted in shared preferences (without setting the small icon, notifications will not appear)
 
 ```java
- mWoorldsSDK.setNotificationSmallIcon(R.drawable.ic_launcher);
+ woorlds.setNotificationSmallIcon(R.drawable.ic_launcher);
 ```
 
 when a notification is clicked the default behavior is to start the default launcher activity. if you want to specify a different activity you may add the following meta data to your AndroidManifest.xml
@@ -224,6 +224,24 @@ state.
 ```java
     woorlds.setEnabled(true);
 ```
+
+
+## Supporting Android SDK build numbers
+
+Since Android 6 require to use permissions in a different way then earlier versions, 
+we adjust our Sdk to that. Apps which are not support Android 6 (build versions 23) and
+can't support methods such as ContextCompat.checkSelfPermission(...) can configure that 
+in their Manifset file and set it value to less then '23'. That way we will know to ignore
+dangerous method calls, which may cause exceptions.
+Please notice: our default settings is for build version 23. 
+
+
+```xml
+<meta-data
+    android:name="com.woorlds.sdk.androidsdk.support"
+    android:value="23" />
+```
+
 
 ## proguard-rules.pro
 -dontwarn com.woorlds.woorldssdk.**
