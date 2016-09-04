@@ -74,8 +74,17 @@ NSString *campaignId = [woorldsSDK getCampaign];
 
 When your user provides some concrete identity you may attach that identity to the tracked events and activity using
 
-```java
+```objc
     [woorldsSDK identify:@"johndoe@there.now"];
+```
+
+## Start/Stop SDK at runtime
+
+When you want to start/stop the SDK at runtime
+
+```objc
+[woorldsSDK startSdk];
+[woorldsSDK stopSdk];
 ```
 
 # Tracking
@@ -97,6 +106,21 @@ In order to create a custom tracking event you may specify event name, and addit
 ```objc
 [woorldsSDK track:@"clicked" :@{@"button-name": @"send", @"section": @"news"}]
 ```
+
+In order to let us keep tracking application status, please implement to following in your AppDelegate file
+
+```objc
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+  WoorldsSDK *woorldsSDK = [WoorldsSDK sharedInstance];
+  [woorldsSDK trackAppState:false];
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+  WoorldsSDK *woorldsSDK = [WoorldsSDK sharedInstance];
+  [woorldsSDK trackAppState:true];
+ }
+```
+
 
 ## Notifications
 
@@ -129,6 +153,14 @@ func application(application: UIApplication, didReceiveLocalNotification notific
 }
 
 ```
+
+Disable/Enable notifications at runtime
+
+```objc
+[woorldsSDK setNotificationsEnabled:<true/false>];
+
+```
+
 
 ## Updates
 
