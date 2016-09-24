@@ -154,6 +154,20 @@ func application(application: UIApplication, didReceiveLocalNotification notific
 
 ```
 
+On every notification sent from the SDK, you can listen to the event as following:
+
+```objc
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationReceived:) name:@"notificationSent" object:nil];
+
+-(void)notificationReceived:(NSNotification *)notification {
+    if ([notification.name isEqualToString:@"notificationSent"]) {
+        UILocalNotification *localNotification = (UILocalNotification *)notification.userInfo;
+        // do something with localNotification
+    }
+}
+
+```
+
 Disable/Enable notifications at runtime
 
 ```objc
