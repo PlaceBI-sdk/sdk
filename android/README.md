@@ -45,6 +45,7 @@ if you are not using the library then you must attach the following system event
             <action android:name="com.woorlds.message" />
             <action android:name="com.woorlds.notification" />
             <action android:name="com.woorlds.notificationclicked" />
+            <action android:name="com.woorlds.wakeupintent" />
         </intent-filter>
     </receiver>
     <service android:exported="false" android:name="com.woorlds.woorldssdk.Service"/>
