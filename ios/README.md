@@ -156,14 +156,34 @@ func application(application: UIApplication, didReceiveLocalNotification notific
 
 On every notification sent from the SDK, you can listen to the event as following:
 
+1. Via observer:
+
 ```objc
 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationReceived:) name:@"woorldsNotification" object:nil];
 
 -(void)notificationReceived:(NSNotification *)notification {
     if ([notification.name isEqualToString:@"notificationSent"]) {
-        UILocalNotification *localNotification = (UILocalNotification *)notification.userInfo;
-        // do something with localNotification
+        NSDictionary *notifInfo = notification.userInfo;
+        // do something with notifInfo
     }
+}
+
+```
+
+2. Via delegate:
+
+```objc
+@interface MyViewController : UIViewController <WoorldsNotificationDelegate>
+
+- (void)viewDidLoad
+{
+    ...
+    woorldsSDK = [WoorldsSDK sharedInstance];
+    woorldsSDK.delegate = self;
+}
+
+-(void)notificationSent:(NSDictionary *)notifInfo {
+    // do something with notifInfo
 }
 
 ```
