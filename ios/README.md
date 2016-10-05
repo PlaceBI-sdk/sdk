@@ -112,12 +112,12 @@ In order to let us keep tracking application status, please implement to followi
 ```objc
 - (void)applicationDidEnterBackground:(UIApplication *)application {
   WoorldsSDK *woorldsSDK = [WoorldsSDK sharedInstance];
-  [woorldsSDK trackAppState:false];
+  [woorldsSDK trackAppState:NO];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
   WoorldsSDK *woorldsSDK = [WoorldsSDK sharedInstance];
-  [woorldsSDK trackAppState:true];
+  [woorldsSDK trackAppState:YES];
  }
 ```
 
