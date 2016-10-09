@@ -87,7 +87,17 @@ When you want to start/stop the SDK at runtime
 [woorldsSDK stopSdk];
 ```
 
-# Tracking
+
+## Debug Mode
+
+In order to examine SDK logs, you can set debug mode to true
+
+```objc
+[woorldsSDK setDebugMode:YES]; // Defualt is NO
+```
+
+
+## Tracking
 
 A track is an event sent to server upon a specific event or user interaction of your
 application.
@@ -170,7 +180,7 @@ On every notification sent from the SDK, you can listen to the event as followin
 
 ```
 
-2. Via delegate:
+2. Via delegate (this delegate set to run on the main thread):
 
 ```objc
 @interface MyViewController : UIViewController <WoorldsNotificationDelegate>
