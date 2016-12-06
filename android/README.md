@@ -12,7 +12,7 @@ repositories{
 
 dependencies {
 
-  compile 'com.woorlds:woorldssdk:1.0.22@aar'
+  compile 'com.woorlds:woorldssdk:1.0.29@aar'
   compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.2'
   compile 'com.google.code.gson:gson:2.4'
 }
@@ -29,10 +29,22 @@ The following permissions are used in manifest.xml file
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 ```
+
+if woorlds sdk version is lower or equal to '1.0.28'
+
+```xml
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+```
+
+if woorlds sdk version is heigher or equal to '1.0.29'
+
+```xml
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+```
+
 
 if you are not using the library then you must attach the following system events to a receiver implemented in our libraries
 
