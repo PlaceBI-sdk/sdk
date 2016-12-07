@@ -12,7 +12,7 @@ repositories{
 
 dependencies {
 
-  compile 'com.woorlds:woorldssdk:1.0.29@aar'
+  compile 'com.woorlds:woorldssdk:1.0.30@aar'
   compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.2'
   compile 'com.google.code.gson:gson:2.4'
 }
