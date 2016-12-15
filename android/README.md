@@ -15,6 +15,9 @@ dependencies {
   compile 'com.woorlds:woorldssdk:1.0.30@aar'
   compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.2'
   compile 'com.google.code.gson:gson:2.4'
+
+  //if woorlds sdk version is heigher or equal to '1.0.29'
+  compile 'com.google.android.gms:play-services-location:9.2.0'
 }
 
 ```
