@@ -16,7 +16,7 @@ dependencies {
   compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.2'
   compile 'com.google.code.gson:gson:2.4'
 
-  //if woorlds sdk version is heigher or equal to '1.0.29'
+  //if woorlds sdk version is heigher or equal to '1.0.29' (not including '1.0.33')
   compile 'com.google.android.gms:play-services-location:9.2.0'
 }
 
@@ -42,7 +42,7 @@ if woorlds sdk version is lower or equal to '1.0.28'
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 ```
 
-if woorlds sdk version is heigher or equal to '1.0.29'
+if woorlds sdk version is heigher or equal to '1.0.29' (not including '1.0.33')
 
 ```xml
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
