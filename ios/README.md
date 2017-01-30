@@ -38,14 +38,15 @@ Location always authorization must be required from users, our SDK calls `reques
 <string></string>
 ```
 
+Background Mode should also be enabled for location updates.
+
+
 For versions 0.3.2 and above, need to add
 
 ```xml
 <key>NSMotionUsageDescription</key>
 <string></string>
 ```
-
-Background Mode should also be enabled for location updates.
 
 
 ##  Transport Security
