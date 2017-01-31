@@ -200,7 +200,13 @@ On every notification sent from the SDK, you can listen to the event as followin
     woorldsSDK.delegate = self;
 }
 
+//version <= 0.3.3
 -(void)notificationSent:(NSDictionary *)notifInfo {
+    // do something with notifInfo
+}
+
+//version >= 0.3.4
+-(void)notificationSent:(NSString *)notifInfo {
     // do something with notifInfo
 }
 
