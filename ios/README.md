@@ -41,14 +41,6 @@ Location always authorization must be required from users, our SDK calls `reques
 Background Mode should also be enabled for location updates.
 
 
-For versions 0.3.2 and above, need to add
-
-```xml
-<key>NSMotionUsageDescription</key>
-<string></string>
-```
-
-
 ##  Transport Security
 
 please follow the instructions on this link to override security settings, we will supply a secure transport very soon.
@@ -93,6 +85,22 @@ When you want to start/stop the SDK at runtime
 ```objc
 [woorldsSDK startSdk];
 [woorldsSDK stopSdk];
+```
+
+
+## Start/Stop MotionActivity at runtime
+
+When you want to start/stop device Motion Activity at runtime
+
+```objc
+[woorldsSDK startMotionActivity];
+[woorldsSDK stopMotionActivity];
+```
+
+* Notice! - this methods require user permission (info.plist)
+```xml
+<key>NSMotionUsageDescription</key>
+<string></string>
 ```
 
 
@@ -191,7 +199,7 @@ On every notification sent from the SDK, you can listen to the event as followin
 2. Via delegate (this delegate set to run on the main thread):
 
 ```objc
-@interface MyViewController : UIViewController <WoorldsNotificationDelegate>
+@interface MyViewController : UIViewController <WoorldsDelegate>
 
 - (void)viewDidLoad
 {
@@ -212,6 +220,39 @@ Disable/Enable notifications at runtime
 ```objc
 [woorldsSDK setNotificationsEnabled:<true/false>];
 
+```
+
+
+## Delegate
+
+Woorlds delegate has two methods which you can put in your code in order to receive updates from the SDK. 
+Implementation as following:
+
+```objc
+@interface MyViewController : UIViewController <WoorldsDelegate>
+
+- (void)viewDidLoad
+{
+    ...
+    woorldsSDK = [WoorldsSDK sharedInstance];
+    woorldsSDK.delegate = self;
+}
+```
+
+Each time notification is scheduled this method will be called:
+```objc
+-(void)notificationSent:(NSDictionary *)notifInfo {
+    // do something with notifInfo
+}
+```
+
+Each time user change his permission (either from popup or settings app) this method will be called:
+```objc
+-(void)permissionEvent:(NSDictionary *)permission {
+    // dictionary with two fields:
+    // "permissionType" : "motion_activity_permission" / "location_permission"
+    // "isAllowed": YES / NO
+}
 ```
 
 
