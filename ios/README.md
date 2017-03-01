@@ -246,7 +246,11 @@ Each time notification is scheduled this method will be called:
 }
 ```
 
-Each time user change his permission (either from popup or settings app) this method will be called:
+Each time user change his permission (either from popup or settings app) and one of the following methods will be called:
+  - for location permisssion [woorldsSdk startSdk];
+  - for device motion activity permission [woorldsSdk startMotionActivity];
+
+  this method will be called within your app:
 ```objc
 -(void)permissionEvent:(NSDictionary *)permission {
     // dictionary with two fields:
