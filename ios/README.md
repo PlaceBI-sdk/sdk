@@ -34,8 +34,6 @@ Location always authorization must be required from users, our SDK calls `reques
 ```xml
 <key>NSLocationAlwaysUsageDescription</key>
 <string></string>
-<key>NSLocationWhenInUseUsageDescription</key>
-<string></string>
 ```
 
 Background Mode should also be enabled for location updates.
