@@ -1,4 +1,4 @@
-Woorlds SDK for iOS
+PlaceBI SDK for iOS
 ===================
 
 This is the iOS SDK for using the Woorlds offered capabilities
@@ -8,12 +8,12 @@ This is the iOS SDK for using the Woorlds offered capabilities
 a pod may be used as simple as adding
 
 ```
-pod "WoorldsSDK", :git => 'https://github.com/woorlds-sdk/pod.git'
+pod "WoorldsSDK", :git => 'https://github.com/PlaceBI-sdk/pod.git'
 ```
 
 ## Manual
 
-If you are not using Cocoapods then a static library file can be found at https://github.com/woorlds-sdk/pod and the header file to be used with it.
+If you are not using Cocoapods then a static library file can be found at https://github.com/PlaceBI-sdk/pod and the header file to be used with it.
 Please make sure the frameworks defined in the podspec are added to your project's Linked Frameworks and Libraries section.
 
 ## SDK key
@@ -25,7 +25,7 @@ An SDK key must be provided in the `info.plist` file of your application with th
 <string>your-api-key</string>
 ```
 
-If you have not received your api key yet please send us mail to <support@woorlds.com> or go to http://www.woorlds.com for the sign up process
+If you have not received your api key yet please send us mail to <support@woorlds.com> or go to http://www.placebi.com for the sign up process
 
 ## Requirements
 

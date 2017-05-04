@@ -1,4 +1,4 @@
-Woorlds SDK for Android
+PlaceBI SDK for Android
 =======================
 
 This is the Android SDK for using the Woorlds offered capabilities
@@ -24,7 +24,7 @@ dependencies {
 
 ## Manual
 
-get the latest .aar from our repository on github: https://github.com/woorlds-sdk/android-sdk/tree/master/com/woorlds/woorldssdk/ and rename the .aar to .jar and extract it, then take within the classes.jar and rename it to woorldssdk.jar to include it with the dependencies, which you can find on http://mvnrepository.com/ and download the files manually.
+get the latest .aar from our repository on github: https://github.com/PlaceBI-sdk/android-sdk/tree/master/com/woorlds/woorldssdk/ and rename the .aar to .jar and extract it, then take within the classes.jar and rename it to woorldssdk.jar to include it with the dependencies, which you can find on http://mvnrepository.com/ and download the files manually.
 
 The following permissions are used in manifest.xml file
 
