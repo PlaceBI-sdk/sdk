@@ -25,7 +25,7 @@ An SDK key must be provided in the `info.plist` file of your application with th
 <string>your-api-key</string>
 ```
 
-If you have not received your api key yet please send us mail to <support@woorlds.com> or go to http://www.placebi.com for the sign up process
+If you have not received your api key yet please send us mail to <info@placebi.com> or go to http://www.placebi.com for the sign up process
 
 ## Requirements
 
