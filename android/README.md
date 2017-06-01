@@ -1,22 +1,22 @@
 PlaceBI SDK for Android
 =======================
 
-This is the Android SDK for using the Woorlds offered capabilities
+This is the Android SDK for using PlaceBI offered capabilities
 
 ## Android Studio - Gradle
 
 ```
 repositories{
-  maven { url 'https://raw.github.com/woorlds-sdk/android-sdk/master' }
+  maven { url 'https://raw.github.com/PlaceBI-sdk/android-sdk/master' }
 }
 
 dependencies {
 
-  compile 'com.woorlds:woorldssdk:1.0.34@aar'
+  compile 'com.woorlds:woorldssdk:1.0.36@aar'
   compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.2'
   compile 'com.google.code.gson:gson:2.4'
 
-  //if woorlds sdk version is heigher or equal to '1.0.29' (not including '1.0.33')
+  //if placebi sdk version is heigher or equal to '1.0.29' (not including '1.0.33')
   compile 'com.google.android.gms:play-services-location:9.2.0'
 }
 
@@ -24,7 +24,7 @@ dependencies {
 
 ## Manual
 
-get the latest .aar from our repository on github: https://github.com/PlaceBI-sdk/android-sdk/tree/master/com/woorlds/woorldssdk/ and rename the .aar to .jar and extract it, then take within the classes.jar and rename it to woorldssdk.jar to include it with the dependencies, which you can find on http://mvnrepository.com/ and download the files manually.
+get the latest .aar from our repository on github: https://github.com/PlaceBI-sdk/android-sdk/tree/master/com/placebi/placebisdk/ and rename the .aar to .jar and extract it, then take within the classes.jar and rename it to placebisdk.jar to include it with the dependencies, which you can find on http://mvnrepository.com/ and download the files manually.
 
 The following permissions are used in manifest.xml file
 
@@ -36,13 +36,13 @@ The following permissions are used in manifest.xml file
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 ```
 
-if woorlds sdk version is lower or equal to '1.0.28'
+if placebi sdk version is lower or equal to '1.0.28'
 
 ```xml
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 ```
 
-if woorlds sdk version is heigher or equal to '1.0.29' (not including '1.0.33')
+if placebi sdk version is heigher or equal to '1.0.29' (not including '1.0.33')
 
 ```xml
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
@@ -53,7 +53,7 @@ if you are not using the library then you must attach the following system event
 
 ```xml
 <application >
-    <receiver android:name="com.woorlds.woorldssdk.Receiver">
+    <receiver android:name="com.woorlds:woorldssdk.Receiver">
         <intent-filter>
             <action android:name="android.net.wifi.SCAN_RESULTS" />
             <action android:name="android.net.wifi.STATE_CHANGE" />
@@ -61,9 +61,18 @@ if you are not using the library then you must attach the following system event
             <action android:name="com.woorlds.notification" />
             <action android:name="com.woorlds.notificationclicked" />
             <action android:name="com.woorlds.wakeupintent" />
+
+            <!-- Optional (Added in version 1.0.35), take a look in #SDK Issue Messenger -->
+            <action android:name="com.woorlds.issuemessenger" /> 
         </intent-filter>
     </receiver>
     <service android:exported="false" android:name="com.woorlds.woorldssdk.Service"/>
+
+    <!-- from version 1.0.36 - required if targetSdkVersion >= 24 in build.gradle -->
+    <service
+            android:name="com.woorlds.woorldssdk.WoorldsJobServices"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="false" />
 </application>
 ```
 
@@ -71,18 +80,18 @@ if you are not using the library then you must attach the following system event
 
 An SDK key must be provided in the manifest.xml
 
-In order to identify your app you need to specify the api key in the manifest, <support@woorlds.com>
+In order to identify your app you need to specify the api key in the manifest.
 ```xml
     <meta-data
         android:name="com.woorlds.ApiKey"
         android:value="your-api-key" />
 ```
 
-If you have not received your api key yet please send us mail to <support@woorlds.com> or go to http://www.woorlds.com for the sign up process
+If you have not received your api key yet please send us mail to <info@placebi.com> or go to http://www.placebi.com for the sign up process
 
-## Marshmallow
+## Android 6.0 and up
 
-Android 6.0 Marshmallow users may need to ask the user for authorization for fine location permission,please make sure you ask for this permission as early as possible
+Android OS version 6.0 and up apps may need to ask the user for fine location permission,please make sure you ask for this permission as early as possible
 
 ```java
     ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 0);
@@ -90,26 +99,26 @@ Android 6.0 Marshmallow users may need to ask the user for authorization for fin
 
 ## Instance
 
-An instance of the Woorlds object must receive the context of your application but it has a small footprint.
+An instance of the placebi object must receive the context of your application but it has a small footprint.
 
 ```java
-Woorlds woorlds = new Woorlds(context);
+PlaceBI placebi = new PlaceBI(context);
 ```
 
 for analyzing user's beahviour we need as well to signal an application close by calling destory() on pausing
 
 ```java
-woorlds.destroy();
+placebi.destroy();
 ```
 
 
 ## Campaigns
 
-When you need to display an ad you should make sure you have an instance of the Woorlds object and call the getCampaign() method, the method returns a string which can be used to hint your system which information to present according to server set criteria.
+When you need to display an ad you should make sure you have an instance of the placebi object and call the getCampaign() method, the method returns a string which can be used to hint your system which information to present according to server set criteria.
 
 ```java
-Woorlds woorlds = new Woorlds(context);
-String campaign = woorlds.getCampaign();
+PlaceBI placebi = new PlaceBI(context);
+String campaign = placebi.getCampaign();
 showAd(campaign);
 ```
 
@@ -118,16 +127,16 @@ showAd(campaign);
 Some users may alternatively receive segments instead
 
 ```java
-  Woorlds woorlds = new Woorlds();
-  Set<String> segments = woorlds.getSegmentations();
+  PlaceBI placebi = new PlaceBI(context);
+  Set<String> segments = placebi.getSegmentations();
 ```
 
 ## Identity
 
-When your user provides some concrete identity you may attach that identity to the tracked events and activity using
+If you want to identify the user with your own name or id, you should set this identity using:
 
 ```java
-    woorlds.identity("johndoe");
+    placebi.identity("johndoe");
 ```
 
 ## Tracking
@@ -149,17 +158,17 @@ In order to create a custom tracking event you may specify event name, and addit
     HashMap<String,Object> data = new HashMap<String,Object>();
     data.put("click", "button1");
     data.put("activity","welcome-screen");
-    woorlds.track("user-action", data);
+    placebi.track("user-action", data);
 ```
 
 ## Notifications
 
-Notifications may be sent to to clients according to pre-set rules defined in http://dashboard.woorlds.com for more information refer to our website
+Notifications may be sent to to clients according to pre-set rules defined in http://dashboard.placebi.com for more information refer to our website
 
 Server may push notifications according to rules defined in our dashboard. the small icon as defined by android notifications must be defined at least once, the value of the resource to be used as small icon will be persisted in shared preferences (without setting the small icon, notifications will not appear)
 
 ```java
- woorlds.setNotificationSmallIcon(R.drawable.ic_launcher);
+ placebi.setNotificationSmallIcon(R.drawable.ic_launcher);
 ```
 
 when a notification is clicked the default behavior is to start the default launcher activity. if you want to specify a different activity you may add the following meta data to your AndroidManifest.xml
@@ -172,7 +181,7 @@ when a notification is clicked the default behavior is to start the default laun
 
 all notifications will be redirected to that activity's intent filter.
 
-you may disable notifications for your application by calling to `woorlds.setNotificationsEnabled(false)` or vice versa.
+you may disable notifications for your application by calling to `placebi.setNotificationsEnabled(false)` or vice versa.
 
 ## Updates
 
@@ -190,7 +199,7 @@ A possible use case is to receive information about places as the user engage th
 private BroadcastReceiver placesUpdateReceiver =  new BroadcastReceiver() {
     @Override
     public void onReceive(Context context, Intent intent) {
-        // code that uses data from woorlds.getPlaces() / woorlds.getMyPlace();
+        // code that uses data from placebi.getPlaces() / placebi.getMyPlace();
     }
 };
 
@@ -203,7 +212,7 @@ protected void onPause() {
 @Override
 protected void onResume() {
     super.onResume();
-    LocalBroadcastManager.getInstance(this).registerReceiver(placesUpdateReceiver, new IntentFilter("com.woorlds.update.intent"));
+    LocalBroadcastManager.getInstance(this).registerReceiver(placesUpdateReceiver, new IntentFilter("com.placebi.update.intent"));
 }
 ```
 
@@ -212,19 +221,19 @@ protected void onResume() {
 In order to get user current place/places, you can call this methods
 
 ```java
-    Collection<Woorlds.Place> places = woorlds.getPlaces();
+    Collection<placebi.Place> places = placebi.getPlaces();
     //return Collection of places (include near by places) or empty Collection
 
-    Woorlds.Place place = woorlds.getMyPlace();
-    //return Woorlds.Place or null
+    placebi.Place place = placebi.getMyPlace();
+    //return placebi.Place or null
 ```
 
 
 ## Enabling/Disabling
 
 Although we have means to disable the client activity from the server, you may
-choose to disable from client side. you may choose the default behavior which is
-set to enabled by default. Adding a meta-data value to the AndroidManifest.xml
+choose to disable it from the client side. The default behavior is enabled. 
+Adding a meta-data value to the AndroidManifest.xml
 can change it.
 
 ```xml
@@ -238,18 +247,50 @@ state.
 
 
 ```java
-    woorlds.setEnabled(true);
+    placebi.setEnabled(true);
 ```
+
+## SDK Issue Messenger
+
+The app can recieve messages about issues that might afect the SDK operation at runtime.
+There are messages about issues such as device location which might be disabled, permission problems etc.
+The app may use these messages to notify the users 
+
+```java
+private BroadcastReceiver issueMessengerReceiver =  new BroadcastReceiver() {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        int code = intent.getIntExtra("code", 0);
+        //do something with code
+    }
+};
+
+@Override
+protected void onPause() {
+    super.onPause();
+    LocalBroadcastManager.getInstance(this).unregisterReceiver(issueMessengerReceiver);
+}
+
+@Override
+protected void onResume() {
+    super.onResume();
+    LocalBroadcastManager.getInstance(this).registerReceiver(issueMessengerReceiver, new IntentFilter("com.woorlds.issuemessenger"));
+}
+```
+
+Code Mapping:
+    - 102: Device Location is disabled
+    - 103: No Location Permissions //from Android 6 and above
 
 
 ## Supporting Android SDK build numbers
 
-Since Android 6 require to use permissions in a different way then earlier versions, 
-we adjust our Sdk to that. Apps which are not support Android 6 (build versions 23) and
-can't support methods such as ContextCompat.checkSelfPermission(...) can configure that 
-in their Manifset file and set it value to less then '23'. That way we will know to ignore
-dangerous method calls, which may cause exceptions.
-Please notice: our default settings is for build version 23. 
+Android OS versions 6.0 and up require to use permissions in a different way than earlier versions. 
+Apps which do not support Android  6 (build versions 23 ) and cannot support methods such as 
+ContextCompat.checkSelfPermission(...) can configure that in their Manifset file 
+and set their value to less then '23'. In this case, the SDK ignores dangerous method calls
+which may cause exceptions.
+Please note: The default settings is for build version 23. 
 
 
 ```xml
@@ -269,6 +310,6 @@ Please notice: our default settings is for build version 23.
 -keepclassmembers class com.google.android.gms.ads.identifier.** { *; }
 
 
-For a working example please take a look at the [Demo Application](WoorldsTest/app/src/main/java/woorlds/com/woorldstest/MainActivity.java)
+For a working example please take a look at the [Demo Application](PlaceBITest/app/src/main/java/woorlds/com/woorldstest/MainActivity.java)
 
-If you have any questions, please write to <support@woorlds.com>.
+If you have any questions, please write to <info@placebi.com>.

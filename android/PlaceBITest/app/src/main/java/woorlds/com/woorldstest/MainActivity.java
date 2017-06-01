@@ -7,26 +7,26 @@ import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.woorlds.woorldssdk.Woorlds;
+import com.woorlds.woorldssdk.PlaceBI;
 
 import java.util.Collection;
 
 public class MainActivity extends AppCompatActivity {
-    Woorlds woorlds;
+    PlaceBI placebi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        woorlds = new Woorlds(this);
-        woorlds.setNotificationSmallIcon(R.mipmap.ic_launcher);
+        placebi = new PlaceBI(this);
+        placebi.setNotificationSmallIcon(R.mipmap.ic_launcher);
     }
 
     private BroadcastReceiver placesUpdateReceiver =  new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Collection<Woorlds.Place> places = woorlds.getPlaces();
-            for (Woorlds.Place place : places) {
+            Collection<PlaceBI.Place> places = placebi.getPlaces();
+            for (PlaceBI.Place place : places) {
             }
         }
     };
